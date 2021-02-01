@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Category;
+use App\Models\Genre;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        factory(Category::class, 100)->create();
+        factory(Genre::class, 100)->create();
     }
 }
