@@ -4,8 +4,6 @@ namespace Tests\Feature\Models;
 
 use App\Models\Category;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CategoryTest extends TestCase
@@ -14,7 +12,7 @@ class CategoryTest extends TestCase
 
     public function testList()
     {
-        factory(Category::class, 1)->create();
+        factory(Category::class)->create();
 
         $categories = Category::all();
         $this->assertCount(1, $categories);
