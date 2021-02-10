@@ -25,6 +25,4 @@ jobs:
 
       - name: PhpUnit Tests
         working-directory: ./app
-        run: php /var/www/vendor/bin/phpunit -c /var/www/phpunit.xml
-
-    
+        run: php /var/www/vendor/bin/phpunit -c /var/www/phpunit.xml    
