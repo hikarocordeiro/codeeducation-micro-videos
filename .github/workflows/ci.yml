@@ -7,24 +7,24 @@ on:
 
 jobs:
   check-application:
-  runs-on: ubuntu-latest
-  
-  steps:
-    - uses: actions/checkout@v2
-  
-    - name: Run docker compose
-      run: docker-compose up -d
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+    
+      - name: Run docker compose
+        run: docker-compose up -d
 
-    - name: Directory Permissions
-      working-directory: ./app
-      run: chown -R www-data:www-data /var/www
+      - name: Directory Permissions
+        working-directory: ./app
+        run: chown -R www-data:www-data /var/www
 
-    - name: Install Composer Dependencies
-      working-directory: ./app
-      run: composer install
+      - name: Install Composer Dependencies
+        working-directory: ./app
+        run: composer install
 
-    - name: PhpUnit Tests
-      working-directory: ./app
-      run: php /var/www/vendor/bin/phpunit -c /var/www/phpunit.xml
+      - name: PhpUnit Tests
+        working-directory: ./app
+        run: php /var/www/vendor/bin/phpunit -c /var/www/phpunit.xml
 
     
