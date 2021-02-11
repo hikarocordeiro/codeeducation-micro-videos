@@ -15,10 +15,6 @@ jobs:
       - name: Run docker compose
         run: docker-compose up -d
 
-      - name: Install Composer Dependencies
-        working-directory: ./app
-        run: composer install
-
       - name: PhpUnit Tests
         working-directory: ./app
         run: php /var/www/vendor/bin/phpunit -c /var/www/phpunit.xml    
