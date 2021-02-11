@@ -5,6 +5,10 @@ on:
     branches: 
       - develop
 
+defaults:
+  run:
+    working-directory: www
+
 jobs:
   check-application:
     runs-on: ubuntu-latest
