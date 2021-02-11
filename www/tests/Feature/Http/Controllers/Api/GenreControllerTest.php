@@ -8,7 +8,7 @@ use Tests\TestCase;
 use Tests\Traits\TestValidations;
 use Tests\Traits\TestSaves;
 
-class GenreontrollerTest extends TestCase
+class GenreControllerTest extends TestCase
 {
     use DatabaseMigrations, TestValidations, TestSaves;
 
@@ -67,8 +67,6 @@ class GenreontrollerTest extends TestCase
 
     public function testUpdate()
     {
-        $this->genre = factory(Genre::class)->create(['is_active' => false]);
-
         $data = [
             'name' => 'test',
             'is_active' => true
