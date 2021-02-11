@@ -20,7 +20,7 @@ jobs:
         run: docker-compose up -d --build
 
       - name: Setting Permissions
-        run: docker-compose exec -T app sudo chown -R www-data:www-data .
+        run: docker-compose exec -u root -T app chown -R www-data:www-data /var/www
 
       - name: Composer update
         run: docker-compose exec -T app composer update
