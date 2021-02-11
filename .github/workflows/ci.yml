@@ -15,8 +15,8 @@ jobs:
       - name: Run docker compose
         run: docker-compose up -d --build
 
-      - name: Setting Permissions
-        run: chown -R www-data:www-data .
+      #- name: Setting Permissions
+      #  run: chown -R www-data:www-data .
         
       - name: Copy .env
         run: cp .env.example .env
