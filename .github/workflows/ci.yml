@@ -19,6 +19,9 @@ jobs:
       - name: Run docker compose
         run: docker-compose up -d --build
 
+      - name: Check Docker containers
+        run: docker ps
+
       #- name: Setting Permissions
       #  run: chown -R www-data:www-data .
       - name: Composer update
