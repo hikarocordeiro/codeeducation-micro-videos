@@ -17,5 +17,5 @@ jobs:
 
       - name: PhpUnit Tests
         run: |
-          docker-compose exec -it micro-videos-app bash
-          php /www/vendor/bin/phpunit -c /www/phpunit.xml   
+          docker exec -it micro-videos-app bash
+          vendor/bin/phpunit   
