@@ -1,0 +1,44 @@
+name: CI-laravel
+
+on:
+  pull_request:
+    branches: 
+      - develop
+
+defaults:
+  run:
+    working-directory: www
+
+jobs:
+  check-application:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+    
+      - name: Run docker compose
+        run: docker-compose up -d --build
+
+      - name: Setting Permissions
+        run: docker-compose exec -u root -T app chown -R www-data:www-data /var/www
+
+      - name: Composer Install
+        run: docker-compose exec -T app composer install
+
+      - name: Composer update
+        run: docker-compose exec -T app composer update
+        
+      - name: Copy .env
+        run: docker-compose exec -T app cp .env.example .env
+
+      - name: Copy .env.testing
+        run: docker-compose exec -T app cp .env.testing.example .env.testing
+
+      - name: Run key generate
+        run: docker-compose exec -T app php artisan key:generate
+
+      - name: Run migrations
+        run: docker-compose exec -T app php artisan migrate
+
+      - name: Run phpunit
+        run: docker-compose exec -T app vendor/bin/phpunit
