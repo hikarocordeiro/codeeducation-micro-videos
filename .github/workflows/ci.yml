@@ -15,10 +15,6 @@ jobs:
       - name: Run docker compose
         run: docker-compose up -d
 
-      - name: Directory Permissions
-        working-directory: ./app
-        run: chown -R www-data:www-data /var/www
-
       - name: Install Composer Dependencies
         working-directory: ./app
         run: composer install
