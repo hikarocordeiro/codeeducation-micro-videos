@@ -19,7 +19,9 @@ jobs:
         run: docker-compose ps
 
       - name: PhpUnit Tests
-        run: www/vendor/bin/phpunit
+        run: |
+          ls
+          php /var/www/vendor/bin/phpunit
 #        run: |
 #          ls
 #          docker-compose exec -T app bash
