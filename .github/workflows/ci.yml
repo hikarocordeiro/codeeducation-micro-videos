@@ -22,8 +22,8 @@ jobs:
       #- name: Setting Permissions
       #  run: chown -R www-data:www-data .
       - name: Composer update
-        run: composer update
-        
+        run: docker exec -t app composer update
+
       - name: Composer Install
         run: composer install
         
