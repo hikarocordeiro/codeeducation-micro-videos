@@ -19,31 +19,31 @@ jobs:
       - name: Run docker compose
         run: docker-compose up -d --build
 
-      - name: Check Docker containers
-        run: docker ps
+      #- name: Check Docker containers
+      #  run: docker ps
 
       #- name: Setting Permissions
       #  run: chown -R www-data:www-data .
       - name: Composer update
-        run: docker exec -t codeeducation-micro-videos_app composer update
+        run:  docker-compose exec -T app composer update
 
       - name: Composer Install
-        run: composer install
+        run: docker-compose exec -T app composer install
         
       - name: Copy .env
-        run: cp .env.example .env
+        run: docker-compose exec -T app cp .env.example .env
 
       - name: Copy .env.testing
-        run: cp .env.testing.example .env.testing
+        run: docker-compose exec -T app cp .env.testing.example .env.testing
 
       - name: Run key generate
-        run: php artisan key:generate
+        run: docker-compose exec -T app php artisan key:generate
 
       - name: Run migrations
-        run: php artisan migrate
+        run: docker-compose exec -T app php artisan migrate
 
       - name: Run phpunit
-        run: php vendor/bin/phpunit
+        run: docker-compose exec -T app php vendor/bin/phpunit
 
 #      - name: See docker compose container running
 #        run: docker-compose ps
