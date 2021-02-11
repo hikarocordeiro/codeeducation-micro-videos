@@ -40,21 +40,5 @@ jobs:
       - name: Run migrations
         run: docker-compose exec -T app php artisan migrate
 
-      - name: check directories
-        run: docker-compose exec -T app ls
-
       - name: Run phpunit
         run: docker-compose exec -T app vendor/bin/phpunit
-
-#      - name: See docker compose container running
-#        run: docker-compose ps
-
-#      - name: PhpUnit Tests
-#        run: |
-#          cd www/
-#          ls
-#          php vendor/bin/phpunit
-#        run: |
-#          ls
-#          docker-compose exec -T app bash
-#          vendor/bin/phpunit   
