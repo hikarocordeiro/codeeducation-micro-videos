@@ -20,5 +20,5 @@ jobs:
 
       - name: PhpUnit Tests
         run: |
-          docker-compose exec app sh
+          docker-compose exec -T app bash
           vendor/bin/phpunit   
