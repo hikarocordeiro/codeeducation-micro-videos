@@ -20,7 +20,7 @@ jobs:
 
       - name: PhpUnit Tests
         run: |
-          cd www/www/
+          cd www/
           ls
           php vendor/bin/phpunit
 #        run: |
