@@ -15,6 +15,9 @@ jobs:
       - name: Run docker compose
         run: docker-compose up -d
 
+      - name: See docker compose container running
+        run: docker-compose ps
+
       - name: PhpUnit Tests
         run: |
           docker-compose exec app sh
