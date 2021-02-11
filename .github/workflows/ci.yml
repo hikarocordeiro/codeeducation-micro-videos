@@ -23,6 +23,8 @@ jobs:
           ls
           cd www/
           ls
+          cs www/
+          ls
           php vendor/bin/phpunit
 #        run: |
 #          ls
