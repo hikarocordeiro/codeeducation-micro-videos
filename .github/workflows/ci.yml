@@ -16,4 +16,4 @@ jobs:
         run: docker-compose up -d
 
       - name: PhpUnit Tests
-        run: php /var/www/vendor/bin/phpunit -c /var/www/phpunit.xml   
+        run: php /www/vendor/bin/phpunit -c /www/phpunit.xml   
