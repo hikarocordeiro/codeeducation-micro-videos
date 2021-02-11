@@ -21,6 +21,11 @@ jobs:
 
       #- name: Setting Permissions
       #  run: chown -R www-data:www-data .
+      - name: Composer Install
+        run: composer install
+
+      - name: Composer update
+        run: composer update
         
       - name: Copy .env
         run: cp .env.example .env
