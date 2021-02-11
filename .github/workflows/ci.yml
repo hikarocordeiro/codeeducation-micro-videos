@@ -22,11 +22,11 @@ jobs:
       - name: Setting Permissions
         run: docker-compose exec -u root -T app chown -R www-data:www-data /var/www
 
-      - name: Composer update
-        run: docker-compose exec -T app composer update
-
       - name: Composer Install
         run: docker-compose exec -T app composer install
+
+      - name: Composer update
+        run: docker-compose exec -T app composer update
         
       - name: Copy .env
         run: docker-compose exec -T app cp .env.example .env
@@ -40,8 +40,11 @@ jobs:
       - name: Run migrations
         run: docker-compose exec -T app php artisan migrate
 
+      - name: check directories
+        run: docker-compose exec -T app ls
+
       - name: Run phpunit
-        run: docker-compose exec -T app php vendor/bin/phpunit
+        run: docker-compose exec -T app vendor/bin/phpunit
 
 #      - name: See docker compose container running
 #        run: docker-compose ps
