@@ -41,9 +41,9 @@ class GenreController extends BasicCrudController
         return $obj;
     }
 
-    protected function handleRelations($video, Request $request)
+    protected function handleRelations($genre, Request $request)
     {
-        $video->categories()->sync($request->get('categories_id'));
+        $genre->categories()->sync($request->get('categories_id'));
     }
 
     protected function model()
