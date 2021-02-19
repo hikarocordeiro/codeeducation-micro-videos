@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Video extends Model
 {
@@ -12,7 +14,7 @@ class Video extends Model
     const RATING_LIST = ['L', '10', '12', '14', '16', '18'];
 
     protected $fillable = [
-        'title', 
+        'title',
         'description',
         'year_launched',
         'opened',
@@ -28,6 +30,57 @@ class Video extends Model
         'duration' => 'integer'
     ];
     public $incrementing = false;
+
+    public static function create(array $attributes = [])
+    {
+        try {
+            DB::beginTransaction();
+
+            $obj = static::query()->create($attributes);
+            static::handleRelations($obj, $attributes);
+            // upload
+            DB::commit();
+            return  $obj;
+        } catch (Exception $e) {
+            if (isset($obj)) {
+                //exluir arquivos de upload
+            }
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function update(array $attributes = [], array $options = [])
+    {
+        try {
+            DB::beginTransaction();
+
+            $saved = parent::update($attributes, $options);
+            static::handleRelations($this, $attributes);
+            if ($saved) {
+                //upload
+                // excluir arquivos antigos
+            }
+
+            DB::commit();
+            return $saved;
+        } catch (Exception $e) {
+            //exluir arquivos de upload
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    protected static function handleRelations(Video $video, array $attributes)
+    {
+        if (isset($attributes['categories_id'])) {
+            $video->categories()->sync($attributes['categories_id']);
+        }
+
+        if (isset($attributes['genres_id'])) {
+            $video->genres()->sync($attributes['genres_id']);
+        }
+    }
 
     public function categories()
     {

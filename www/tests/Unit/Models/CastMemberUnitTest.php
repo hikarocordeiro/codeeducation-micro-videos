@@ -3,7 +3,7 @@
 namespace Tests\Unit\Models;
 
 use App\Models\CastMember;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Traits\Uuid;
 
