@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class UploadFilesStub extends Model
 {
     use UploadFiles;
+
 /*
     protected $table = 'upload_file_stubs';
     protected $fillable = ['name', 'file1', 'file2'];
+*/
     protected static $fileFields = ['file1', 'file2'];
-    
+ /*   
     public static function makeTable()
     {
         Schema::create('upload_file_stubs', function ($table) {
