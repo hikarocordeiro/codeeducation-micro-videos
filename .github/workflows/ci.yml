@@ -37,6 +37,9 @@ jobs:
       - name: Run key generate
         run: docker-compose exec -T app php artisan key:generate
 
+      - name: Show containers
+        run: docker-compose ps
+
       - name: Run migrations
         run: docker-compose exec -T app php artisan migrate:refresh --seed
 
