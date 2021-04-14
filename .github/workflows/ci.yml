@@ -38,7 +38,7 @@ jobs:
         run: docker-compose exec -T app php artisan key:generate
 
       - name: Run migrations
-        run: docker-compose exec -T app php artisan migrate:refresh --seed --pretend
+        run: docker-compose exec -T app php artisan migrate:refresh --seed --verbose --profile
 
       - name: Run phpunit
         run: docker-compose exec -T app vendor/bin/phpunit
