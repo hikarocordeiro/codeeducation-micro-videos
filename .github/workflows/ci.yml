@@ -40,6 +40,9 @@ jobs:
       - name: Show containers
         run: docker-compose ps
 
+      - name: Show db logs container
+        run: docker logs micro-videos-db
+
       - name: Run migrations
         run: docker-compose exec -T app php artisan migrate:refresh --seed
 
