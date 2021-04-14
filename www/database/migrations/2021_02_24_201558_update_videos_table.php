@@ -15,6 +15,7 @@ class UpdateVideosTable extends Migration
     {
         Schema::table('videos', function (Blueprint $table) {
             $table->string('video_file')->nullable();
+            $table->string('thumb_file')->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ class UpdateVideosTable extends Migration
     {
         Schema::table('videos', function (Blueprint $table) {
             $table->dropColumn('video_file');
+            $table->dropColumn('thumb_file');
         });
     }
 }
