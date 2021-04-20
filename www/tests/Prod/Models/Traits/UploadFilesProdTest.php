@@ -12,7 +12,7 @@ use Tests\Traits\TestStorage;
 
 class UploadFilesProdTest extends TestCase
 {
-    use TestStorages, TestProd;
+    use TestStorage, TestProd;
     private $obj;
 
     protected function setUp(): void
