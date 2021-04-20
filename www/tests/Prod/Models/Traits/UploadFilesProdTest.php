@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Storage;
 use Tests\Stubs\Models\UploadFilesStub;
 use Tests\TestCase;
 use Tests\Traits\TestProd;
-use Tests\Traits\TestStorages;
+use Tests\Traits\TestStorage;
 
 class UploadFilesProdTest extends TestCase
 {
-    use TestStorages, TestProd;
+    use TestStorage, TestProd;
     private $obj;
 
     protected function setUp(): void
@@ -22,7 +22,11 @@ class UploadFilesProdTest extends TestCase
         $this->obj = new UploadFilesStub();
         Config::set('filesystems.default', 'gcs');
         $this->deleteAllFiles();
-        
+    }
+
+    public function testRelativeFilePath()
+    {
+        $this->assertEquals("1/video.mp4", $this->obj->relativeFilePath("video.mp4"));
     }
 
     public function testUploadFile()
