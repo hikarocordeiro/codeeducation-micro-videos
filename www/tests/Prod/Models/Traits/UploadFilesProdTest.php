@@ -12,7 +12,7 @@ use Tests\Traits\TestStorage;
 
 class UploadFilesProdTest extends TestCase
 {
-    use TestStorage, TestProd;
+    use TestStorages, TestProd;
     private $obj;
 
     protected function setUp(): void
@@ -61,7 +61,6 @@ class UploadFilesProdTest extends TestCase
 
     public function testDeleteFile()
     {
-
         $file = UploadedFile::fake()->create('video.mp4');
         $this->obj->uploadFile($file);
         $filename = $file->hashName();
