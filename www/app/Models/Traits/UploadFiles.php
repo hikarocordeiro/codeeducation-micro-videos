@@ -25,9 +25,12 @@ trait UploadFiles
 			$model->oldFiles = array_map(function ($fileField) use ($model) {
 				return $model->getOriginal($fileField);
 			}, $filesFiltered);
-		});
+		});		
+	}
 
-		
+	public function relativeFilePath($value)
+	{
+		return "{$this->uploadDir()}/{$value}";
 	}
 
 	/**
@@ -77,5 +80,10 @@ trait UploadFiles
 		}
 
 		return $files;
+	}
+
+	protected function getFileUrl($filename)
+	{
+		return Storage::url($this->relativeFilePath($filename));
 	}
 }

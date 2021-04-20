@@ -5,6 +5,7 @@ namespace Tests\Feature\Http\Controllers\Api\VideoController;
 use App\Models\Category;
 use App\Models\Genre;
 use App\Models\Video;
+use Illuminate\Support\Arr;
 use Tests\Traits\TestValidations;
 use Tests\Traits\TestSaves;
 
@@ -128,33 +129,24 @@ class VideoControllerCrudTest extends BaseVideoControllerTestCase
 
     public function testSaveWithoutFiles()
     {
-        $category = factory(Category::class)->create();
-        $genre =  factory(Genre::class)->create();
-        $genre->categories()->sync($category->id);
+        $testData = Arr::except($this->sendData, ['categories_id', 'genres_id']);
 
         $data = [
             [
-                'send_data' => $this->sendData + [
-                    'categories_id' => [$category->id],
-                    'genres_id' => [$genre->id]
-                ],
-                'test_data' => $this->sendData + ['opened' => false]
+                'send_data' => $this->sendData,
+                'test_data' => $testData + ['opened' => false]
             ],
             [
                 'send_data' => $this->sendData + [
                     'opened' => true,
-                    'categories_id' => [$category->id],
-                    'genres_id' => [$genre->id]
                 ],
-                'test_data' => $this->sendData + ['opened' => true]
+                'test_data' => $testData + ['opened' => true]
             ],
             [
                 'send_data' =>  $this->sendData + [
                     'rating' => Video::RATING_LIST[1],
-                    'categories_id' => [$category->id],
-                    'genres_id' => [$genre->id]
                 ],
-                'test_data' =>  $this->sendData + ['rating' => Video::RATING_LIST[1]]
+                'test_data' =>  $testData + ['rating' => Video::RATING_LIST[1]]
             ]
         ];
 
@@ -213,7 +205,9 @@ class VideoControllerCrudTest extends BaseVideoControllerTestCase
 
     public function testShow()
     {
-        $response = $this->get(route('videos.show', ['video' => $this->video->id]));
+        $response = $this->json(
+            'GET', route('videos.show', ['video' => $this->video->id])
+        );
 
         $response
             ->assertStatus(200)
@@ -222,7 +216,9 @@ class VideoControllerCrudTest extends BaseVideoControllerTestCase
 
     public function testDestroy()
     {
-        $response = $this->json('DELETE', route('videos.destroy', ['video' => $this->video->id]));
+        $response = $this->json(
+            'DELETE', route('videos.destroy', ['video' => $this->video->id])
+        );
         $response->assertStatus(204);
         $this->assertNull(Video::find($this->video->id));
         $this->assertNotNull(Video::withTrashed()->find($this->video->id));

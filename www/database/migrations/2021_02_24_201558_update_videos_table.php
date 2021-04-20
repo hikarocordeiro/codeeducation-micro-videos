@@ -14,8 +14,10 @@ class UpdateVideosTable extends Migration
     public function up()
     {
         Schema::table('videos', function (Blueprint $table) {
-            $table->string('video_file')->nullable();
             $table->string('thumb_file')->nullable();
+            $table->string('banner_file')->nullable();
+            $table->string('trailer_file')->nullable();
+            $table->string('video_file')->nullable();           
         });
     }
 
@@ -27,8 +29,10 @@ class UpdateVideosTable extends Migration
     public function down()
     {
         Schema::table('videos', function (Blueprint $table) {
-            $table->dropColumn('video_file');
             $table->dropColumn('thumb_file');
+            $table->dropColumn('banner_file');
+            $table->dropColumn('trailer_file');
+            $table->dropColumn('video_file');
         });
     }
 }
